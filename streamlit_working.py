@@ -1,7 +1,4 @@
 import os
-from io import BytesIO
-from dotenv import load_dotenv
-
 import streamlit as st
 
 from langchain_huggingface import HuggingFaceEmbeddings, HuggingFaceEndpoint, ChatHuggingFace
@@ -14,7 +11,6 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_classic.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
 
-load_dotenv()
 
 st.set_page_config(page_title="FAISS RAG Chatbot", page_icon="🤖", layout="centered")
 st.title("RAG Assignment — Streamlit (single app)")
