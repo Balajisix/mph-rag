@@ -17,8 +17,8 @@ model_id = os.getenv("HF_MODEL")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 llm = HuggingFaceEndpoint(
-    repo_id="openai/gpt-oss-20b",
-    huggingfacehub_api_token="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",
+    repo_id=model_id,
+    huggingfacehub_api_token=access_token,
     temperature=0.1,
     max_new_tokens=512
 )
