@@ -28,7 +28,7 @@ def lazy_init_models():
     if "chat_model" not in st.session_state:
         llm_endpoint = HuggingFaceEndpoint(
             repo_id="openai/gpt-oss-20b",
-            huggingfacehub_api_token=os.getenv("HF_TOKEN"),
+            huggingfacehub_api_token=os.environ("HF_TOKEN"),
             temperature=0.1,
             timeout=120,
         )
