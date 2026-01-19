@@ -16,8 +16,8 @@ model_id = os.getenv("HF_MODEL")
 
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
 llm = HuggingFaceEndpoint(
-    repo_id=model_id,
-    huggingfacehub_api_token=access_token,
+    repo_id="openai/gpt-oss-20b",
+    huggingfacehub_api_token="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",
     temperature=0.1,
     max_new_tokens=512
 )
@@ -27,7 +27,7 @@ all_chunks = []
 
 def initialize_knowledge_base():
     global all_vectors, all_chunks
-    loader = PyPDFLoader("./data/manual.pdf")
+    loader = PyPDFLoader("./data/troubleshooting.pdf")
     docs = loader.load()
 
     text_splitter = RecursiveCharacterTextSplitter(
@@ -65,10 +65,12 @@ async def ask_rag(request: QueryRequest):
     try:
         context_chunk = get_relevant_context(request.query)
         context_text = "\n\n".join(context_chunk)
-        prompt_template = f"""Use the context below to answer:
+        prompt_template = f"""Use the context below to answer the question.:
         Context: {context_text}
         Question: {request.query}
-        Answer:"""
+        Answer:
+        Return only the JSON object, no extra text.
+        """
         response = model.invoke(prompt_template)
         return {
             "answer": response.content,
