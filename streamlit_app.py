@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
  
-API_URL = "https://mph-rag-backend.onrender.com"
+API_URL = "http://localhost:8000"
  
 st.set_page_config(page_title="FAISS RAG Chatbot", page_icon="🤖")
 st.title("RAG Assignment")
